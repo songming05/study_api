@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.*;
 
 public class CouponController {
 
+    //...
+    //기능완성
+
 
     //RESTful API
 //    @GetMapping
