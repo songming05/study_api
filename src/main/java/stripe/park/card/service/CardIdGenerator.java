@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 public class CardIdGenerator {
 
     // id = card_1Lt4Ah2eZvKYlo2C9JYrQSaB
-    private static final String CAPITAL_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static final String NUMERIC = "0123456789";
 
     public String generate() {
         String prefix = "card_";
