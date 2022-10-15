@@ -1,9 +1,9 @@
 package stripe.park.card.web;
 
 public class CardRetrieveResultResponse {
-    public final String id;
+    public final String cardId;
 
     public CardRetrieveResultResponse(String id) {
-        this.id = id;
+        this.cardId = id;
     }
 }
