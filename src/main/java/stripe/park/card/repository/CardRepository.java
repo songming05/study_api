@@ -16,4 +16,12 @@ public class CardRepository {
         }
         database.put(entity.cardId, entity);
     }
+
+    public CardEntity retrieve(String cardId) {
+        CardEntity entity = database.get(cardId);
+        if (entity == null) {
+            throw new IllegalArgumentException("해당 카드가 없습니다. :: cardId" + cardId);
+        }
+        return entity;
+    }
 }

@@ -17,6 +17,11 @@ public class CardService {
         this.cardRepository = cardRepository;
     }
 
+    public Card retrieve(String id) {
+        CardEntity cardEntity = cardRepository.retrieve(id);
+
+        return new Card(cardEntity.cardId, cardEntity.funding, cardEntity.brand, cardEntity.country, cardEntity.name, cardEntity.exp_month, cardEntity.exp_year, cardEntity.last4, cardEntity.createdTime);
+    }
 
     public Card create(CardCreationRequest cardCreationRequest) {
         String cardId = cardIdGenerator.generate();

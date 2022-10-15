@@ -16,6 +16,7 @@ public class CardController {
 
     @GetMapping("api/v1/cards/{id}")
     public CardRetrieveResultResponse retrieveCard(@PathVariable String id) {
+        cardService.retrieve(id);
         return new CardRetrieveResultResponse(id);
     }
 
