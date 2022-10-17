@@ -1,15 +1,45 @@
 package stripe.song.accounts.web;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import stripe.song.accounts.common.Account;
+import stripe.song.accounts.common.AccountId;
+import stripe.song.accounts.service.AccountService;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class AccountController {
 
-    @GetMapping("/api/v1/accounts/{id}")
-    public String retrieveAccount(@PathVariable String id) {
+    private final AccountService accountService;
 
-        return "retrieveAccount: "+id;
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
     }
+
+    @GetMapping("/api/v1/accounts/{id}")
+    public AccountRetreiveResultResponse retrieveAccount(@PathVariable String id) {
+
+        AccountId accountId = new AccountId(id);
+        Account account = accountService.retreive(accountId);
+        return new AccountRetreiveResultResponse(account.accountId);
+    }
+
+    @GetMapping("/api/v1/accounts")
+    public AccountRetreiveListResultResponse retrieveAccountList(@RequestParam(required = false) String count) {
+
+        String maybeCount = Optional.ofNullable(count).orElse("20");
+        int limit = Integer.parseInt(maybeCount);
+
+        //TODO
+        List<Account> accountList = accountService.retreiveList(limit);
+        return new AccountRetreiveListResultResponse();
+    }
+
+    @PostMapping("/api/v1/accounts")
+    public AccountCreationResponse createAcoount() {
+        Account account = accountService.create();
+        return new AccountCreationResponse(account.accountId);
+    }
+
 }
