@@ -16,6 +16,9 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    /**
+     * Customer 생성
+     */
     public Customer create(CustomerCreationRequest customerCreationRequest) {
         String customerId = customerIdGenerator.generateCustomerId();
 
@@ -33,5 +36,15 @@ public class CustomerService {
                 customerEntity.customerDescription,
                 customerEntity.customerCreatedTime);
 
+    }
+
+    public Customer retrieve(String id) {
+        CustomerEntity customer = customerRepository.retrieve(id);
+
+        return new Customer(customer.customerId,
+                customer.customerName,
+                customer.customerPhone,
+                customer.customerDescription,
+                customer.customerCreatedTime);
     }
 }
