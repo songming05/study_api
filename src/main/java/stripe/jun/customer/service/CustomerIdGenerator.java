@@ -6,10 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerIdGenerator {
 
-    /**
-     * cus_4QFHdAzXHKCFfn 18자리
-     * implementation 'org.apache.commons:commons-lang3:3.12.0'
-     */
     public String generateCustomerId() {
         String prefix = "cus_";
 

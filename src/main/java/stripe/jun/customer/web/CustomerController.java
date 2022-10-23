@@ -14,14 +14,6 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-//    @GetMapping("api/v1/customers/{id}")
-//    public String retrieveCustomer(@PathVariable String id) {
-//        return id + " : cus_8eqdcH07DUqA5s";
-//    }
-
-    /**
-     * Customer 생성
-     */
     @PostMapping("api/v1/customers")
     public CustomerCreatedResultResponse createCustomer(@RequestBody CustomerRequestDto customerRequestDto) {
 
@@ -30,9 +22,6 @@ public class CustomerController {
         return new CustomerCreatedResultResponse(customer);
     }
 
-    /**
-     * Customer 찾기
-     */
     @GetMapping("api/v1/customers/{id}")
     public CustomerRetrieveResultResponse retrieveCustomer(@PathVariable String id) {
         customerService.retrieve(id);

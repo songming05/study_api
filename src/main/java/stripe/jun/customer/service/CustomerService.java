@@ -16,9 +16,6 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    /**
-     * Customer 생성
-     */
     public Customer create(CustomerCreationRequest customerCreationRequest) {
         String customerId = customerIdGenerator.generateCustomerId();
 
