@@ -23,4 +23,13 @@ public class CustomerRepository {
         }
         database.put(entity.customerId, entity);
     }
+
+    public CustomerEntity retrieve(String id) {
+        CustomerEntity customerEntity = database.get(id);
+        if (customerEntity == null) {
+            throw new IllegalArgumentException("해당하는 Customer 가 없습니다. id ::: " + id); /** java.lang.IllegalArgumentException은 적합하지 않거나(illegal) 적절하지 못한(inappropriate) 인자를 메소드에 넘겨주었을 때 발생합니다. */
+        }
+
+        return customerEntity;
+    }
 }
