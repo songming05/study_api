@@ -1,8 +1,5 @@
 package stripe.jun.customer.service;
 
-/**
- * Service 계층에서 사용하는 Customer 생성요청 객체
- */
 public class CustomerCreationRequest {
 
     public final String customerName;

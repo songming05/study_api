@@ -19,9 +19,6 @@ public class CustomerController {
         return id + " : cus_8eqdcH07DUqA5s";
     }
 
-    /**
-     * Customer 생성
-     */
     @PostMapping("api/v1/customers")
     public CustomerCreatedResultResponse createCustomer(@RequestBody CustomerRequestDto customerRequestDto) {
 
