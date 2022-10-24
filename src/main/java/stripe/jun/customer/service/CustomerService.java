@@ -1,6 +1,7 @@
 package stripe.jun.customer.service;
 
 import org.springframework.stereotype.Service;
+import stripe.jun.customer.common.CustomerId;
 import stripe.jun.customer.repository.CustomerEntity;
 import stripe.jun.customer.repository.CustomerRepository;
 
@@ -43,5 +44,11 @@ public class CustomerService {
                 customer.customerPhone,
                 customer.customerDescription,
                 customer.customerCreatedTime);
+    }
+
+    public CustomerDeleteResult delete(CustomerId customerId) {
+        CustomerEntity customerEntity = customerRepository.delete(customerId);
+
+        return new CustomerDeleteResult(customerEntity.customerId);
     }
 }
