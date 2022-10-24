@@ -1,6 +1,7 @@
 package stripe.jun.customer.repository;
 
 import org.springframework.stereotype.Component;
+import stripe.jun.customer.common.CustomerId;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,5 +25,13 @@ public class CustomerRepository {
         }
 
         return customerEntity;
+    }
+
+    public CustomerEntity delete(CustomerId customerId) {
+        if (!database.containsKey(customerId.customerId)) {
+            throw new IllegalArgumentException("해당하는 Customer 가 없습니다. id ::: " + customerId.customerId);
+        }
+
+        return database.remove(customerId.customerId);
     }
 }
