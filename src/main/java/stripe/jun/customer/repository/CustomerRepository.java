@@ -5,6 +5,7 @@ import stripe.jun.customer.common.CustomerId;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 @Component
 public class CustomerRepository {
@@ -33,5 +34,13 @@ public class CustomerRepository {
         }
 
         return database.remove(customerId.customerId);
+    }
+
+    public CustomerEntity update(CustomerEntity customerEntity) {
+        if (database.containsKey(customerEntity.customerId)) {
+            return database.put(customerEntity.customerId, customerEntity);
+        } else {
+            throw new IllegalArgumentException("해당하는 Customer 가 없습니다. id ::: " + customerEntity.customerId);
+        }
     }
 }
