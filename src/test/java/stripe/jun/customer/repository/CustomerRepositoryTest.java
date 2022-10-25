@@ -19,15 +19,6 @@ class CustomerRepositoryTest {
     String generateCustomerId = new CustomerIdGenerator().generateCustomerId();
 
     @Test
-    @DisplayName("Customer Id 생성 테스트")
-    void customerIdGeneratorTest() {
-
-        assertThat(generateCustomerId.length()).isEqualTo(18);
-        assertThat(generateCustomerId.substring(0, 4)).isEqualTo("cus_");
-        assertThat(generateCustomerId.substring(4)).containsPattern("[a-zA-Z0-9]*");
-    }
-
-    @Test
     @DisplayName("Customer retrieve 테스트, Id 값을 조회하였을 때, Id가 있다면 CustomerId를 반환하고 없다면 메시지를 반환한다.")
     void customerRetrieveTest() {
         //Given
