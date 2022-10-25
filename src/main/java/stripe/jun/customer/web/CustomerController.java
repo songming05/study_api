@@ -2,10 +2,7 @@ package stripe.jun.customer.web;
 
 import org.springframework.web.bind.annotation.*;
 import stripe.jun.customer.common.CustomerId;
-import stripe.jun.customer.service.Customer;
-import stripe.jun.customer.service.CustomerCreationRequest;
-import stripe.jun.customer.service.CustomerDeleteResult;
-import stripe.jun.customer.service.CustomerService;
+import stripe.jun.customer.service.*;
 
 @RestController
 public class CustomerController {
@@ -39,5 +36,19 @@ public class CustomerController {
         CustomerDeleteResult customerDeleteResult = customerService.delete(customerId);
 
         return new CustomerDeleteResultResponse(customerDeleteResult);
+    }
+
+    @PutMapping("api/v1/customers/{id}")
+    public CustomerUpdateResultResponse updateCustomer(@PathVariable String id
+            ,@RequestBody CustomerUpdateDto customerUpdateDto) {
+
+        CustomerId customerId = new CustomerId(id);
+
+        CustomerUpdateResult customerUpdateResult = customerService.update(new CustomerUpdateRequest(customerId.customerId
+                ,customerUpdateDto.customerName
+                ,customerUpdateDto.customerPhone
+                ,customerUpdateDto.customerDescription));
+
+        return new CustomerUpdateResultResponse(customerUpdateResult);
     }
 }
