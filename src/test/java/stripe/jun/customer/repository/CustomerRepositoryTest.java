@@ -62,4 +62,37 @@ class CustomerRepositoryTest {
         assertThat(customer.customerId).isEqualTo(customerDeleteResult.customerId);
         assertThatThrownBy(() -> customerService.delete(customerIdForException)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("Customer update 테스트, 존재하는 Id 를 수정하면 요청된 사항들이 수정되고, 존재하지 않는다면 메시지를 반환한다.")
+    void customerUpdateTest() {
+        //Given
+        CustomerCreationRequest customerCreationRequest = new CustomerCreationRequest("김준수"
+                , "010-1234-5678"
+                , "부자가 되고 싶은 사람");
+        Customer customer = customerService.create(customerCreationRequest);
+
+
+        CustomerUpdateRequest customerUpdateRequest = new CustomerUpdateRequest(customer.customerId
+                ,"리치맨 김준수"
+                ,"010-8888-9999"
+                ,"주식 잘 좀 돼라");
+
+        CustomerId customerIdForException = new CustomerId(generateCustomerId);
+
+        CustomerUpdateRequest customerUpdateException = new CustomerUpdateRequest(customerIdForException.customerId
+                ,"리치맨 김준수"
+                ,"010-8888-9999"
+                ,"주식 잘 좀 돼라");
+
+        //When
+        CustomerUpdateResult customerUpdateResult = customerService.update(customerUpdateRequest);
+
+        //Then
+        assertThat(customer.customerId).isEqualTo(customerUpdateResult.customerId);
+        assertThat(customerUpdateRequest.customerName).isEqualTo("리치맨 김준수");
+        assertThat(customerUpdateRequest.customerPhone).isEqualTo("010-8888-9999");
+        assertThat(customerUpdateRequest.customerDescription).isEqualTo("주식 잘 좀 돼라");
+        assertThatThrownBy(() -> customerService.update(customerUpdateException)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
