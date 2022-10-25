@@ -13,13 +13,12 @@ public class AccountRepository {
 
     public String save(Account account) {
         if (database.containsKey(account.accountId.value)) throw new IllegalArgumentException();
-        AccountEntity accountEntity = new AccountEntity(account.accountId.value);
+        AccountEntity accountEntity = new AccountEntity(account.accountId.value, account.created, "USD", null, 0.0);
         database.put(account.accountId.value, accountEntity);
         return account.accountId.value;
     }
 
-    public Account retreiveById(AccountId accountId) {
-        AccountEntity accountEntity = database.get(accountId.value);
-        return new Account(new AccountId(accountEntity.accountId));
+    public AccountEntity retreiveById(AccountId accountId) {
+        return database.get(accountId.value);
     }
 }

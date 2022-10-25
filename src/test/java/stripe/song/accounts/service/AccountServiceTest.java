@@ -16,6 +16,9 @@ class AccountServiceTest {
         AccountService accountService = new AccountService(accountRepository);
         Account newAccount = accountService.create();
         assertThat(newAccount).isNotNull();
-        assertThat(newAccount.accountId.value).isEqualTo(accountRepository.retreiveById(newAccount.accountId).accountId.value);
+        assertThat(newAccount.accountId.value).isEqualTo(accountRepository.retreiveById(newAccount.accountId).accountId);
     }
+
+
+
 }

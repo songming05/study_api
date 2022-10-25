@@ -3,8 +3,10 @@ package stripe.song.accounts.service;
 import org.springframework.stereotype.Service;
 import stripe.song.accounts.common.Account;
 import stripe.song.accounts.common.AccountId;
+import stripe.song.accounts.repository.AccountEntity;
 import stripe.song.accounts.repository.AccountRepository;
 
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -28,7 +30,7 @@ public class AccountService {
 
     public Account create() {
         AccountId accountId = new AccountId(AccountIdGenerator.generate());
-        Account account = new Account(accountId);
+        Account account = new Account(accountId, Instant.now(), "USD", null, 0.0);
         accountRepository.save(account);
         return account;
     }
