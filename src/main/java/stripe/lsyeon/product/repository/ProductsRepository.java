@@ -1,6 +1,7 @@
 package stripe.lsyeon.product.repository;
 
 import org.springframework.stereotype.Component;
+import stripe.lsyeon.product.common.ProductsId;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,4 +29,11 @@ public class ProductsRepository {
         return entity;
     }
 
+    public ProductsEntity delete(ProductsId productsId) {
+        if (!database.containsKey(productsId.productsId)) {
+            throw new IllegalArgumentException("해당하는 상품 id 가 없습니다. ::: " + productsId.productsId);
+        }
+
+        return database.remove(productsId.productsId);
+    }
 }

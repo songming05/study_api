@@ -1,6 +1,7 @@
 package stripe.lsyeon.product.service;
 
 import org.springframework.stereotype.Service;
+import stripe.lsyeon.product.common.ProductsId;
 import stripe.lsyeon.product.repository.ProductsEntity;
 import stripe.lsyeon.product.repository.ProductsRepository;
 
@@ -22,11 +23,11 @@ public class ProductsService {
         ProductsEntity productsEntity = productsRepository.retrieve(id);
 
         return new Products(productsEntity.prodId
-                          , productsEntity.prodObject
-                          , productsEntity.prodActive
-                          , productsEntity.prodCreated
-                          , productsEntity.prodName
-                          );
+                , productsEntity.prodObject
+                , productsEntity.prodActive
+                , productsEntity.prodCreated
+                , productsEntity.prodName
+        );
     }
 
     public Products createProducts(ProductsProductionRequest productsProductionRequest) {
@@ -45,6 +46,11 @@ public class ProductsService {
         return new Products(prodId, entity.prodObject, entity.prodActive, entity.prodCreated, entity.prodName);
     }
 
+    public ProductsDeleteResult delete(ProductsId productsId) {
+        ProductsEntity productsEntity = productsRepository.delete(productsId);
+
+        return new ProductsDeleteResult(productsEntity.prodId);
+    }
 }
 
 

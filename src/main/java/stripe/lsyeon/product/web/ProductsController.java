@@ -1,9 +1,8 @@
 package stripe.lsyeon.product.web;
 
 import org.springframework.web.bind.annotation.*;
-import stripe.lsyeon.product.service.Products;
-import stripe.lsyeon.product.service.ProductsProductionRequest;
-import stripe.lsyeon.product.service.ProductsService;
+import stripe.lsyeon.product.common.ProductsId;
+import stripe.lsyeon.product.service.*;
 
 
 @RestController
@@ -17,7 +16,7 @@ public class ProductsController {
 
     @GetMapping("api/v1/products/{id}")
     public ProductsRetrieveResult retrieveProducts(@PathVariable String id) {
-        Products products = productsService.retrieveProducts(id);// 찾아왔는데 받은 그릇이 없어요.
+        Products products = productsService.retrieveProducts(id);
         return new ProductsRetrieveResult(products);
     }
 
@@ -29,6 +28,16 @@ public class ProductsController {
 
         /* ProductsCreateResult */
         return new ProductsRetrieveResult(products);
+    }
+
+    @DeleteMapping("api/v1/products/{id}")
+    public ProductsDeleteResultResponse deleteProducts(@PathVariable String id) {
+
+        ProductsId productsId = new ProductsId(id);
+
+        ProductsDeleteResult productsDeleteResult = productsService.delete(productsId);
+
+        return new ProductsDeleteResultResponse(productsDeleteResult);
     }
 
 }
