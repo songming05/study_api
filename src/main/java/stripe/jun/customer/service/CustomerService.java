@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import stripe.jun.customer.common.CustomerId;
 import stripe.jun.customer.repository.CustomerEntity;
 import stripe.jun.customer.repository.CustomerRepository;
+import stripe.jun.customer.web.CustomerUpdateDto;
 
 import java.time.LocalDateTime;
 
@@ -50,5 +51,22 @@ public class CustomerService {
         CustomerEntity customerEntity = customerRepository.delete(customerId);
 
         return new CustomerDeleteResult(customerEntity.customerId);
+    }
+
+    public CustomerUpdateResult update(CustomerUpdateRequest customerUpdateRequest) {
+        CustomerId customerId = new CustomerId(customerUpdateRequest.customerId);
+
+        CustomerEntity customerEntity = new CustomerEntity(customerId.customerId,
+                customerUpdateRequest.customerName,
+                customerUpdateRequest.customerPhone,
+                customerUpdateRequest.customerDescription,
+                LocalDateTime.now());
+
+        CustomerEntity updateCustomerResult = customerRepository.update(customerEntity);
+
+        return new CustomerUpdateResult(updateCustomerResult.customerId
+                ,updateCustomerResult.customerName
+                ,updateCustomerResult.customerPhone
+                ,updateCustomerResult.customerDescription);
     }
 }
