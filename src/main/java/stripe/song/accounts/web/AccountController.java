@@ -21,7 +21,7 @@ public class AccountController {
     public AccountRetreiveResultResponse retrieveAccount(@PathVariable String id) {
 
         AccountId accountId = new AccountId(id);
-        Account account = accountService.retreive(accountId);
+        Account account = accountService.retrieve(accountId);
         return new AccountRetreiveResultResponse(account.accountId);
     }
 
@@ -32,7 +32,7 @@ public class AccountController {
         int limit = Integer.parseInt(maybeCount);
 
         //TODO
-        List<Account> accountList = accountService.retreiveList(limit);
+        List<Account> accountList = accountService.retrieveList(limit);
         return new AccountRetreiveListResultResponse();
     }
 
